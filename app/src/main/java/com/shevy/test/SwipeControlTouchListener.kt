@@ -43,5 +43,4 @@ class SwipeControlTouchListener: RecyclerView.OnItemTouchListener  {
         }
         return true
     }
-
 }
