@@ -3,15 +3,12 @@ package com.shevy.test
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
+import com.shevy.test.R
+import com.shevy.test.SwipeControlTouchListener
+import com.shevy.test.SwipeDirection
 import com.shevy.test.databinding.ActivityMainBinding
 import com.shevy.test.ui.main.SectionsPagerAdapter
 
