@@ -1,52 +1,41 @@
 package com.shevy.test
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
-import androidx.recyclerview.widget.RecyclerView
-import com.shevy.test.R
-import com.shevy.test.SwipeControlTouchListener
-import com.shevy.test.SwipeDirection
+import androidx.fragment.app.FragmentTransaction
 import com.shevy.test.databinding.ActivityMainBinding
-import com.shevy.test.ui.main.SectionsPagerAdapter
+import com.shevy.test.ui.main.Fragment1
+import com.shevy.test.ui.main.Fragment2
+import com.shevy.test.ui.main.Fragment3
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val swipeControlTouchListener by lazy {
-        SwipeControlTouchListener()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(root) }
 
-        val colorList = listOf(Color.CYAN, Color.GREEN, Color.YELLOW)
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, colorList)
-        binding.viewPager.adapter = sectionsPagerAdapter
-
-        // apply touch listener on ViewPager RecyclerView
-        val recyclerView = binding.viewPager[0] as? RecyclerView
-        if (recyclerView != null) {
-            recyclerView.addOnItemTouchListener(swipeControlTouchListener)
-        } else {
-            Log.w(localClassName, "RecyclerView is null, Version changed ?!")
+        binding.btn1.setOnClickListener {
+            val f1 = Fragment1()
+            val ft = supportFragmentManager.beginTransaction()
+            ft.replace(R.id.container, f1)
+            ft.commit()
         }
 
-        // finally hookup the radio group
-        binding.swipeDirectionRg.setOnCheckedChangeListener { _, checkedId ->
-            swipeControlTouchListener.setSwipeDirection(
-                when (checkedId) {
-                    R.id.allRb -> SwipeDirection.ALL
-                    R.id.leftRb -> SwipeDirection.LEFT
-                    R.id.rightRb -> SwipeDirection.RIGHT
-                    R.id.noneRb -> SwipeDirection.NONE
-                    else -> SwipeDirection.ALL
-                }
-            )
+        binding.btn2.setOnClickListener {
+            val f2 = Fragment2()
+            val ft = supportFragmentManager.beginTransaction()
+            ft.replace(R.id.container, f2)
+            ft.commit()
+        }
+
+        binding.btn3.setOnClickListener {
+            val f3 = Fragment3()
+            val ft = supportFragmentManager.beginTransaction()
+            ft.replace(R.id.container, f3)
+            ft.commit()
         }
     }
+
 }
