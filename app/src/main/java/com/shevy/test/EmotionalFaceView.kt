@@ -10,9 +10,6 @@ import kotlin.math.min
 
 class EmotionalFaceView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
-    // Краска объекта для окрашивания и стилизации
-/*    private val paint = Paint(Paint.ANTI_ALIAS_FLAG)*/
-
     companion object {
         private const val DEFAULT_FACE_COLOR = Color.YELLOW
         private const val DEFAULT_EYES_COLOR = Color.BLACK
