@@ -66,10 +66,8 @@ class MainActivity : AppCompatActivity() {
                     applicationContext,
                     "File name cannot be blank",
                     Toast.LENGTH_LONG
-                )
-                    .show()
+                ).show()
             }
         }
-
     }
 }
