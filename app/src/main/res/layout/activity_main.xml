@@ -4,48 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey"
-    android:padding="@dimen/screen_padding"
     tools:context="MainActivity">
 
+
     <TextView
-        android:id = "@+id/textView"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:layout_alignParentTop = "true"
-        android:layout_centerHorizontal = "true"
-        android:text = "Hello Custom Views" />
-
-    <!--Full path for the cusom view -->
-    <com.shevy.test.EmotionalFaceView
-        android:id="@+id/emotionalFaceView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/textView" />
-
-    <com.shevy.test.EmotionalFaceView
-        android:id="@+id/happyButton"
-        android:layout_width="@dimen/face_button_dimen"
-        android:layout_height="@dimen/face_button_dimen"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        app:borderColor="@color/white"
-        app:eyesColor="@color/white"
-        app:faceColor="@color/red"
-        app:mouthColor="@color/white"
-        app:state="happy" />
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="31dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="117dp"
+        android:text="File Name"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
 
-    <com.shevy.test.EmotionalFaceView
-        android:id="@+id/sadButton"
-        android:layout_width="@dimen/face_button_dimen"
-        android:layout_height="@dimen/face_button_dimen"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        app:borderColor="@color/black"
-        app:eyesColor="@color/black"
-        app:faceColor="@color/light_grey"
-        app:mouthColor="@color/black"
-        app:state="sad" />
+    <EditText
+        android:id="@+id/editFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignLeft="@+id/btnSave"
+        android:layout_alignStart="@+id/btnSave"
+        android:layout_marginLeft="31dp"
+        android:layout_marginStart="31dp"
+        android:ems="10"
+        android:paddingLeft="10dp"
+        android:inputType="textPersonName"
+        android:hint="file name" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_alignRight="@+id/textView"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="67dp"
+        android:text="File Data"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+
+    <EditText
+        android:id="@+id/editData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/editFile"
+        android:layout_alignStart="@+id/editFile"
+        android:ems="10"
+        android:lines="5"
+        android:hint="data" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_marginBottom="53dp"
+        android:layout_marginLeft="49dp"
+        android:layout_marginStart="49dp"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/btnView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/editData"
+        android:layout_alignRight="@+id/editData"
+        android:layout_alignTop="@+id/btnSave"
+        android:layout_marginEnd="33dp"
+        android:layout_marginRight="33dp"
+        android:text="View" />
 </RelativeLayout>
