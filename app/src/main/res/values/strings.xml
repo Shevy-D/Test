@@ -7,4 +7,8 @@
     <string name="tab_text_2">Tab 2</string>
 
     <string name="title_activity_base_example">BaseExampleActivity</string>
+    <string name="enter_post">Enter POST</string>
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <string name="action_submit">Action submit</string>
 </resources>

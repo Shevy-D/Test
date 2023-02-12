@@ -1,13 +1,25 @@
 package com.shevy.test
 
-import android.content.Context
 import android.os.Bundle
-import android.widget.Toast
+import android.text.TextUtils
+import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.shevy.test.data.model.Post
+import com.shevy.test.data.remote.ApiService
 import com.shevy.test.databinding.ActivityMainBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.*
 
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var mResponseTv: TextView
+    private lateinit var mApiService: ApiService
 
     private lateinit var binding: ActivityMainBinding
 
@@ -15,59 +27,42 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(root) }
 
-        val fileName = binding.editFile
-        val fileData = binding.editData
+        val titleEt = binding.etTitle
+        val bodyEt = binding.etBody
+        val submitBtn: Button = binding.btnSubmit
+        mResponseTv = binding.tvResponse
 
-        binding.btnSave.setOnClickListener {
-            val file: String = fileName.text.toString()
-            val data: String = fileData.text.toString()
-            if (file.trim() != "") {
-                val fileOutputStream: FileOutputStream
-                try {
-                    fileOutputStream = openFileOutput(file, Context.MODE_PRIVATE)
-                    fileOutputStream.write(data.toByteArray())
-                } catch (e: FileNotFoundException) {
-                    e.printStackTrace()
-                } catch (e: NumberFormatException) {
-                    e.printStackTrace()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-                Toast.makeText(applicationContext, "Data save", Toast.LENGTH_LONG).show()
-                fileName.text.clear()
-                fileData.text.clear()
-            } else {
-                Toast.makeText(applicationContext, "File name cannot be blank", Toast.LENGTH_LONG)
-                    .show()
-            }
-        }
+        mApiService = ApiService.getApiService()
 
-        binding.btnView.setOnClickListener {
-            val filename = fileName.text.toString()
-            if (filename.trim() != "") {
-                var fileInputStream: FileInputStream? = null
-                fileInputStream = openFileInput(filename)
-                val inputStreamReader = InputStreamReader(fileInputStream)
-                val bufferedReader = BufferedReader(inputStreamReader)
-                val stringBuilder: StringBuilder = StringBuilder()
-                var text: String? = null
-                while (run {
-                        text = bufferedReader.readLine()
-                        text
-                    } != null) {
-                    stringBuilder.append(text)
-                }
-                //Displaying data on EditText
-                fileData.setText(stringBuilder.toString()).toString()
-            } else {
-                Toast.makeText(
-                    applicationContext,
-                    "File name cannot be blank",
-                    Toast.LENGTH_LONG
-                ).show()
+        submitBtn.setOnClickListener {
+            val title = titleEt.text.toString().trim { it <= ' ' }
+            val body = bodyEt.text.toString().trim { it <= ' ' }
+            if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(body)) {
+                sendPost(title, body)
             }
         }
     }
+
+    private fun sendPost(title: String, body: String) {
+        mApiService.savePost(title, body, 1).enqueue(object : Callback<Post> {
+            override fun onResponse(call: Call<Post>, response: Response<Post>) {
+                if (response.isSuccessful) {
+                    showResponse(response.body().toString());
+                    Log.i("TestTAG", "post submitted to API." + response.body().toString())
+                }
+            }
+            override fun onFailure(call: Call<Post>, t: Throwable) {
+                Log.i("TestTAG", "Unable to submit post to API.")
+            }
+        })
+    }
+
+    fun showResponse(response: String?) {
+        if (mResponseTv.visibility == View.GONE) {
+            mResponseTv.visibility = View.VISIBLE
+        }
+        mResponseTv.text = response
+    }
+
+
 }
